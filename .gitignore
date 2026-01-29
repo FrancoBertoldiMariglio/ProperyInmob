@@ -41,3 +41,10 @@ Thumbs.db
 # Debug
 *.pem
 debug.log
+
+# Generated config files
+vite.config.js
+vite.config.d.ts
+
+# Serena plugin
+.serena/
