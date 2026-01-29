@@ -84,43 +84,43 @@ Sesión actual: 1 (En progreso)
 
 **Estimación:** 8-10 horas | **Dependencias:** Módulos 1, 2
 
-- [ ] 3.1 Tipos TypeScript: AgentProperty, PropertyStatus, Portal
-- [ ] 3.2 Mock data: 20+ propiedades del agente
-- [ ] 3.3 PropertyTable component (TanStack Table):
-  - [ ] Columnas: foto, dirección, precio, estado, leads, días, acciones
-  - [ ] Sorting por columna
-  - [ ] Filtering por estado, tipo, operación
-  - [ ] Bulk actions (pausar, activar, eliminar)
-  - [ ] Paginación
-- [ ] 3.4 PropertyFilters component
-- [ ] 3.5 Página de lista de propiedades
-- [ ] 3.6 PropertyForm (crear/editar):
-  - [ ] Datos básicos (tipo, operación, precio)
-  - [ ] Ubicación con mapa
-  - [ ] Características (m², ambientes, etc.)
-  - [ ] Amenities checkboxes
-  - [ ] Datos del propietario
-  - [ ] Comisión
-- [ ] 3.7 ImageUploader component:
-  - [ ] Drag & drop
-  - [ ] Reordenar imágenes
-  - [ ] Marcar principal
-  - [ ] Preview
-- [ ] 3.8 Página de detalle de propiedad:
-  - [ ] Galería de fotos
-  - [ ] Información completa
-  - [ ] Stats (vistas, leads, visitas)
+- [x] 3.1 Tipos TypeScript: AgentProperty, PropertyStatus, Portal
+- [x] 3.2 Mock data: 20+ propiedades del agente
+- [x] 3.3 PropertyTable component (TanStack Table):
+  - [x] Columnas: foto, dirección, precio, estado, leads, días, acciones
+  - [x] Sorting por columna
+  - [x] Filtering por estado, tipo, operación
+  - [x] Bulk actions (pausar, activar, eliminar)
+  - [x] Paginación
+- [x] 3.4 PropertyFilters component
+- [x] 3.5 Página de lista de propiedades
+- [x] 3.6 PropertyForm (crear/editar):
+  - [x] Datos básicos (tipo, operación, precio)
+  - [x] Ubicación con mapa
+  - [x] Características (m², ambientes, etc.)
+  - [x] Amenities checkboxes
+  - [x] Datos del propietario
+  - [x] Comisión
+- [x] 3.7 ImageUploader component:
+  - [x] Drag & drop
+  - [x] Reordenar imágenes
+  - [x] Marcar principal
+  - [x] Preview
+- [x] 3.8 Página de detalle de propiedad:
+  - [x] Galería de fotos
+  - [x] Información completa
+  - [x] Stats (vistas, leads, visitas)
   - [ ] Historial de actividad
-- [ ] 3.9 PublishModal:
-  - [ ] Selección de portales
-  - [ ] Preview por portal
-  - [ ] Publicar/Pausar/Despublicar
-- [ ] 3.10 Hook `useProperties` con TanStack Query
-- [ ] 3.11 Store `propertyFormStore` con Zustand
-- [ ] 3.12 Validación con Zod + React Hook Form
+- [x] 3.9 PublishModal:
+  - [x] Selección de portales
+  - [x] Preview por portal
+  - [x] Publicar/Pausar/Despublicar
+- [x] 3.10 Hook `useProperties` con TanStack Query
+- [x] 3.11 Store `propertyFormStore` con Zustand
+- [x] 3.12 Validación con Zod + React Hook Form
 - [ ] 3.13 Unit tests
 
-**Status:** NOT_STARTED
+**Status:** IN_PROGRESS (12/13 completadas - pendiente: unit tests)
 
 ---
 
