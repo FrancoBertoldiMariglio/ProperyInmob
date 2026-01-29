@@ -9,8 +9,8 @@ Sesión actual: 1 (En progreso)
 
 ## Estado General
 
-- Módulo actual: 1 de 10 (casi completo)
-- Progreso global: 8%
+- Módulo actual: 2 de 10 (casi completo)
+- Progreso global: 18%
 - Apps: Dashboard (React/Vite) + Mobile (React Native/Expo)
 
 ---
@@ -46,37 +46,37 @@ Sesión actual: 1 (En progreso)
 
 **Estimación:** 6-8 horas | **Dependencias:** Módulo 1
 
-- [ ] 2.1 Layout principal del dashboard:
-  - [ ] Sidebar colapsable con navegación
-  - [ ] Header con búsqueda global + notificaciones + perfil
-  - [ ] Breadcrumb
-  - [ ] Command palette (Cmd+K)
-- [ ] 2.2 Mock data: KPIs del agente (leads, propiedades, visitas, revenue)
-- [ ] 2.3 KPICard component:
-  - [ ] Métrica principal
-  - [ ] Comparación vs período anterior (% cambio)
-  - [ ] Sparkline mini gráfico
-  - [ ] Icono representativo
-- [ ] 2.4 Dashboard home page con grid de KPIs
-- [ ] 2.5 LeadsOverviewChart (ApexCharts):
-  - [ ] Leads por estado (stacked bar)
-  - [ ] Tendencia últimos 30 días
-- [ ] 2.6 PropertiesOverviewWidget:
-  - [ ] Activas vs vendidas/alquiladas
-  - [ ] Días promedio en mercado
-- [ ] 2.7 RevenueChart (line chart):
-  - [ ] Comisiones mensuales
-  - [ ] Proyección
-- [ ] 2.8 QuickActions panel:
-  - [ ] Nueva propiedad
-  - [ ] Nuevo lead
-  - [ ] Agendar visita
-  - [ ] Generar valuación
-- [ ] 2.9 Recent activity feed
-- [ ] 2.10 Responsive: tablets + desktop
+- [x] 2.1 Layout principal del dashboard:
+  - [x] Sidebar colapsable con navegación
+  - [x] Header con búsqueda global + notificaciones + perfil
+  - [x] Breadcrumb
+  - [x] Command palette (Cmd+K)
+- [x] 2.2 Mock data: KPIs del agente (leads, propiedades, visitas, revenue)
+- [x] 2.3 KPICard component:
+  - [x] Métrica principal
+  - [x] Comparación vs período anterior (% cambio)
+  - [x] Sparkline mini gráfico
+  - [x] Icono representativo
+- [x] 2.4 Dashboard home page con grid de KPIs
+- [x] 2.5 LeadsOverviewChart (ApexCharts):
+  - [x] Leads por estado (stacked bar)
+  - [x] Tendencia últimos 30 días
+- [x] 2.6 PropertiesOverviewWidget:
+  - [x] Activas vs vendidas/alquiladas
+  - [x] Días promedio en mercado
+- [x] 2.7 RevenueChart (line chart):
+  - [x] Comisiones mensuales
+  - [x] Proyección
+- [x] 2.8 QuickActions panel:
+  - [x] Nueva propiedad
+  - [x] Nuevo lead
+  - [x] Agendar visita
+  - [x] Generar valuación
+- [x] 2.9 Recent activity feed
+- [x] 2.10 Responsive: tablets + desktop
 - [ ] 2.11 Unit tests
 
-**Status:** NOT_STARTED
+**Status:** IN_PROGRESS (10/11 completadas - pendiente: unit tests)
 
 ---
 
@@ -423,9 +423,9 @@ Sesión actual: 1 (En progreso)
 
 ## Registro de Sesiones
 
-| Sesión | Fecha      | Duración    | Módulos | Tareas Completadas | Notas                               |
-| ------ | ---------- | ----------- | ------- | ------------------ | ----------------------------------- |
-| 1      | 2026-01-29 | En progreso | 1       | 14/16              | Setup monorepo, dashboard, packages |
+| Sesión | Fecha      | Duración    | Módulos | Tareas Completadas | Notas                                                   |
+| ------ | ---------- | ----------- | ------- | ------------------ | ------------------------------------------------------- |
+| 1      | 2026-01-29 | En progreso | 1, 2    | 24/27              | Setup monorepo, packages, dashboard layout, KPIs charts |
 
 ---
 
@@ -445,13 +445,19 @@ Sesión actual: 1 (En progreso)
 
 - Ninguno hasta el momento
 
+### Componentes Implementados (Módulo 2)
+
+- **Layout:** Sidebar, Header, Breadcrumb, CommandPalette, MobileSidebar
+- **Dashboard:** KPICard (con sparklines), LeadsOverviewChart, PropertiesOverviewWidget, RevenueChart, QuickActions, RecentActivity
+- Todos los componentes tienen soporte para dark mode y responsive design
+
 ### Dependencias Instaladas
 
 - turbo, prettier, husky, lint-staged (root)
 - react, react-dom, react-router-dom, @tanstack/react-query, zustand
 - vite, tailwindcss, @tailwindcss/vite
 - vitest, @testing-library/react
-- lucide-react, apexcharts
+- lucide-react, apexcharts, react-apexcharts
 - class-variance-authority, @radix-ui/react-slot
 
 ---
@@ -476,7 +482,9 @@ Sesión actual: 1 (En progreso)
 
 ## Próximos Pasos
 
-1. Completar configuración de Expo + NativeWind para mobile (opcional)
-2. Iniciar Módulo 2 (Dashboard Layout + KPIs)
-3. Implementar sidebar colapsable y header con navegación
-4. Crear componentes KPICard con sparklines
+1. Iniciar Módulo 3 (Gestión de Propiedades)
+2. Implementar PropertyTable con TanStack Table
+3. Crear PropertyForm para crear/editar propiedades
+4. Implementar ImageUploader con drag & drop
+5. Opcional: Unit tests para Módulos 1 y 2
+6. Opcional: Configuración de Expo + NativeWind para mobile
