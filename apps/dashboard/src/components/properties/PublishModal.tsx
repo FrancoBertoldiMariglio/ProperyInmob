@@ -23,7 +23,7 @@ const availablePortals: Portal[] = [
     id: 'zonaprop',
     name: 'ZonaProp',
     logo: 'https://placehold.co/40x40/f97316/white?text=ZP',
-    description: 'Portal líder en Argentina',
+    description: 'Portal lider en Argentina',
   },
   {
     id: 'argenprop',
@@ -35,7 +35,7 @@ const availablePortals: Portal[] = [
     id: 'mercadolibre',
     name: 'Mercado Libre',
     logo: 'https://placehold.co/40x40/fbbf24/black?text=ML',
-    description: 'Marketplace más grande de LATAM',
+    description: 'Marketplace mas grande de LATAM',
   },
   {
     id: 'properati',
@@ -43,33 +43,27 @@ const availablePortals: Portal[] = [
     logo: 'https://placehold.co/40x40/10b981/white?text=PR',
     description: 'Portal especializado en propiedades',
   },
-  {
-    id: 'inmuebles24',
-    name: 'Inmuebles24',
-    logo: 'https://placehold.co/40x40/8b5cf6/white?text=I24',
-    description: 'Parte del grupo Navent',
-  },
 ];
 
 const getPortalStatus = (
   portalId: string,
   portals: PortalPublishing[]
 ): PortalPublishing | undefined => {
-  return portals.find((p) => p.portalId === portalId);
+  return portals.find((p) => p.portal === portalId);
 };
 
-const statusColors: Record<string, 'default' | 'success' | 'warning' | 'destructive'> = {
+const statusColors: Record<string, 'default' | 'success' | 'warning' | 'error'> = {
   published: 'success',
   pending: 'warning',
-  failed: 'destructive',
-  unpublished: 'default',
+  paused: 'warning',
+  error: 'error',
 };
 
 const statusLabels: Record<string, string> = {
   published: 'Publicada',
   pending: 'Pendiente',
-  failed: 'Error',
-  unpublished: 'No publicada',
+  paused: 'Pausada',
+  error: 'Error',
 };
 
 export function PublishModal({
@@ -99,7 +93,7 @@ export function PublishModal({
   const handleUnpublish = () => {
     const publishedPortals = property.portals
       .filter((p) => p.status === 'published')
-      .map((p) => p.portalId);
+      .map((p) => p.portal as string);
     const toUnpublish = selectedPortals.filter((id) => publishedPortals.includes(id));
     if (toUnpublish.length > 0) {
       onUnpublish(toUnpublish);
@@ -108,11 +102,11 @@ export function PublishModal({
   };
 
   const hasSelectedPublished = selectedPortals.some((id) =>
-    property.portals.some((p) => p.portalId === id && p.status === 'published')
+    property.portals.some((p) => p.portal === id && p.status === 'published')
   );
 
   const hasSelectedUnpublished = selectedPortals.some(
-    (id) => !property.portals.some((p) => p.portalId === id && p.status === 'published')
+    (id) => !property.portals.some((p) => p.portal === id && p.status === 'published')
   );
 
   return (
@@ -140,7 +134,6 @@ export function PublishModal({
           {availablePortals.map((portal) => {
             const status = getPortalStatus(portal.id, property.portals);
             const isSelected = selectedPortals.includes(portal.id);
-            const isPublished = status?.status === 'published';
 
             return (
               <Card
@@ -179,7 +172,7 @@ export function PublishModal({
                         <Badge variant={statusColors[status.status]}>
                           {status.status === 'published' && <Check className="mr-1 h-3 w-3" />}
                           {status.status === 'pending' && <Clock className="mr-1 h-3 w-3" />}
-                          {status.status === 'failed' && <AlertCircle className="mr-1 h-3 w-3" />}
+                          {status.status === 'error' && <AlertCircle className="mr-1 h-3 w-3" />}
                           {statusLabels[status.status]}
                         </Badge>
                       )}
@@ -193,16 +186,10 @@ export function PublishModal({
                   </div>
 
                   {/* External Link */}
-                  {status?.url && (
-                    <a
-                      href={status.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="rounded p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-700"
-                    >
+                  {status?.externalId && (
+                    <span className="rounded p-2 text-gray-400">
                       <ExternalLink className="h-5 w-5" />
-                    </a>
+                    </span>
                   )}
                 </div>
               </Card>

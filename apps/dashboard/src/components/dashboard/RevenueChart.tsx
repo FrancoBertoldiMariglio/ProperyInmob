@@ -62,7 +62,7 @@ export function RevenueChart({ className }: RevenueChartProps) {
       position: 'top',
       horizontalAlign: 'right',
       labels: { colors: '#6b7280' },
-      markers: { radius: 4 },
+      markers: { size: 6 },
     },
     tooltip: {
       theme: 'light',

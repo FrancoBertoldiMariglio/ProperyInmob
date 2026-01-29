@@ -20,8 +20,8 @@ interface LeadCardProps {
   onQuickAction: (lead: Lead, action: string) => void;
 }
 
-const priorityColors: Record<string, 'default' | 'success' | 'warning' | 'destructive'> = {
-  high: 'destructive',
+const priorityColors: Record<string, 'default' | 'success' | 'warning' | 'error'> = {
+  high: 'error',
   medium: 'warning',
   low: 'default',
 };
@@ -88,8 +88,8 @@ export function LeadCard({ lead, onView, onQuickAction }: LeadCardProps) {
       <div className="mb-2 flex items-start justify-between">
         <div className="flex-1">
           <h4 className="font-medium text-gray-900 dark:text-gray-100">{lead.name}</h4>
-          {lead.property && (
-            <p className="mt-0.5 text-xs text-gray-500 line-clamp-1">{lead.property.title}</p>
+          {lead.propertyTitle && (
+            <p className="mt-0.5 text-xs text-gray-500 line-clamp-1">{lead.propertyTitle}</p>
           )}
         </div>
         <div className="flex items-center gap-1">

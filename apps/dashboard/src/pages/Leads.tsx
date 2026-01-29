@@ -1,8 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { Plus } from 'lucide-react';
 import { Button } from '@propery-agents/ui';
 import { useLeads } from '@propery-agents/core';
-import type { Lead, LeadStatus } from '@propery-agents/api-client';
+import type { Lead, LeadStatus, LeadSource, LeadPriority } from '@propery-agents/api-client';
 import { LeadPipeline, LeadFilters, LeadTable, LeadDetail } from '@/components/leads';
 
 type ViewMode = 'kanban' | 'table';
@@ -11,8 +11,8 @@ type PageMode = 'list' | 'detail';
 interface FiltersState {
   search?: string;
   status?: LeadStatus;
-  source?: string;
-  priority?: string;
+  source?: LeadSource;
+  priority?: LeadPriority;
 }
 
 function Leads() {
@@ -21,7 +21,8 @@ function Leads() {
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [filters, setFilters] = useState<FiltersState>({});
 
-  const { data: leads = [], isLoading, refetch } = useLeads(filters);
+  const { data: leadsData, isLoading, refetch } = useLeads(filters);
+  const leads = useMemo(() => leadsData?.data ?? [], [leadsData]);
 
   const handleViewLead = useCallback((lead: Lead) => {
     setSelectedLead(lead);
@@ -45,14 +46,14 @@ function Leads() {
   const handleQuickAction = useCallback((lead: Lead, action: string) => {
     switch (action) {
       case 'call':
-        if (lead.phone) window.open(`tel:${lead.phone}`);
+        if (lead.contact.phone) window.open(`tel:${lead.contact.phone}`);
         break;
       case 'email':
-        window.open(`mailto:${lead.email}`);
+        window.open(`mailto:${lead.contact.email}`);
         break;
       case 'whatsapp':
-        if (lead.phone) {
-          window.open(`https://wa.me/${lead.phone.replace(/\D/g, '')}`);
+        if (lead.contact.phone) {
+          window.open(`https://wa.me/${lead.contact.phone.replace(/\D/g, '')}`);
         }
         break;
       default:
@@ -61,7 +62,7 @@ function Leads() {
   }, []);
 
   const handleDelete = useCallback(() => {
-    if (selectedLead && window.confirm(`¿Eliminar lead "${selectedLead.name}"?`)) {
+    if (selectedLead && window.confirm(`Eliminar lead "${selectedLead.name}"?`)) {
       // TODO: Implement delete mutation
       console.log('Delete lead:', selectedLead.id);
       handleBack();

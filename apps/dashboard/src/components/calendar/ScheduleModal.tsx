@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { X, Calendar, Clock, MapPin, User } from 'lucide-react';
 import { Button, Input, Select, Card } from '@propery-agents/ui';
-import type { Visit, Property, Lead } from '@propery-agents/api-client';
+import type { Visit, Property, Lead, CreateVisitInput } from '@propery-agents/api-client';
 
 interface ScheduleModalProps {
   isOpen: boolean;
@@ -11,16 +11,8 @@ interface ScheduleModalProps {
   properties: Property[];
   leads: Lead[];
   onClose: () => void;
-  onSubmit: (data: VisitFormData) => void;
+  onSubmit: (data: CreateVisitInput) => void;
   onDelete?: (visit: Visit) => void;
-}
-
-interface VisitFormData {
-  propertyId: string;
-  leadId: string;
-  scheduledAt: string;
-  duration: number;
-  notes?: string;
 }
 
 const durationOptions = [
@@ -32,7 +24,16 @@ const durationOptions = [
 ];
 
 const formatDateForInput = (date: Date): string => {
-  return date.toISOString().slice(0, 16);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const formatTimeForInput = (date: Date): string => {
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  return `${hours}:${minutes}`;
 };
 
 export function ScheduleModal({
@@ -46,10 +47,11 @@ export function ScheduleModal({
   onSubmit,
   onDelete,
 }: ScheduleModalProps) {
-  const [formData, setFormData] = useState<VisitFormData>({
+  const [formData, setFormData] = useState<CreateVisitInput>({
     propertyId: '',
     leadId: '',
-    scheduledAt: '',
+    date: '',
+    startTime: '09:00',
     duration: 60,
     notes: '',
   });
@@ -59,7 +61,8 @@ export function ScheduleModal({
       setFormData({
         propertyId: visit.propertyId,
         leadId: visit.leadId,
-        scheduledAt: formatDateForInput(new Date(visit.scheduledAt)),
+        date: visit.date,
+        startTime: visit.startTime,
         duration: visit.duration || 60,
         notes: visit.notes || '',
       });
@@ -70,7 +73,8 @@ export function ScheduleModal({
       }
       setFormData((prev) => ({
         ...prev,
-        scheduledAt: formatDateForInput(date),
+        date: formatDateForInput(date),
+        startTime: formatTimeForInput(date),
       }));
     }
   }, [visit, initialDate, initialHour]);
@@ -108,7 +112,7 @@ export function ScheduleModal({
             </label>
             <Select
               value={formData.propertyId}
-              onValueChange={(value) => setFormData({ ...formData, propertyId: value })}
+              onChange={(e) => setFormData({ ...formData, propertyId: e.target.value })}
               placeholder="Seleccionar propiedad"
               options={properties.map((p) => ({
                 value: p.id,
@@ -125,26 +129,26 @@ export function ScheduleModal({
             </label>
             <Select
               value={formData.leadId}
-              onValueChange={(value) => setFormData({ ...formData, leadId: value })}
+              onChange={(e) => setFormData({ ...formData, leadId: e.target.value })}
               placeholder="Seleccionar lead"
               options={leads.map((l) => ({
                 value: l.id,
-                label: `${l.name} - ${l.email}`,
+                label: `${l.name} - ${l.contact.email}`,
               }))}
             />
           </div>
 
           {/* Date & Time */}
-          <div className="grid grid-cols-2 gap-4">
-            <div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="col-span-1">
               <label className="mb-1 flex items-center gap-2 text-sm font-medium">
                 <Calendar className="h-4 w-4" />
-                Fecha y hora *
+                Fecha *
               </label>
               <Input
-                type="datetime-local"
-                value={formData.scheduledAt}
-                onChange={(e) => setFormData({ ...formData, scheduledAt: e.target.value })}
+                type="date"
+                value={formData.date}
+                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                 required
               />
             </div>
@@ -152,11 +156,21 @@ export function ScheduleModal({
             <div>
               <label className="mb-1 flex items-center gap-2 text-sm font-medium">
                 <Clock className="h-4 w-4" />
-                Duración
+                Hora
               </label>
+              <Input
+                type="time"
+                value={formData.startTime}
+                onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm font-medium">Duracion</label>
               <Select
                 value={formData.duration.toString()}
-                onValueChange={(value) => setFormData({ ...formData, duration: parseInt(value) })}
+                onChange={(e) => setFormData({ ...formData, duration: parseInt(e.target.value) })}
                 options={durationOptions}
               />
             </div>
@@ -186,19 +200,19 @@ export function ScheduleModal({
               )}
               {selectedLead && (
                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                  👤 {selectedLead.name} ({selectedLead.phone || selectedLead.email})
+                  👤 {selectedLead.name} ({selectedLead.contact.phone || selectedLead.contact.email}
+                  )
                 </p>
               )}
-              {formData.scheduledAt && (
+              {formData.date && formData.startTime && (
                 <p className="text-sm text-gray-600 dark:text-gray-300">
                   🗓️{' '}
-                  {new Date(formData.scheduledAt).toLocaleString('es-AR', {
+                  {new Date(formData.date).toLocaleDateString('es-AR', {
                     weekday: 'long',
                     day: 'numeric',
                     month: 'long',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
+                  })}{' '}
+                  a las {formData.startTime}
                 </p>
               )}
             </Card>

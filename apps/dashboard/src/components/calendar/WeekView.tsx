@@ -45,8 +45,9 @@ export function WeekView({ currentDate, visits, onVisitClick, onTimeSlotClick }:
 
   const getVisitsForDayAndHour = (date: Date, hour: number): Visit[] => {
     return visits.filter((visit) => {
-      const visitDate = new Date(visit.scheduledAt);
-      return isSameDay(visitDate, date) && visitDate.getHours() === hour;
+      const visitDate = new Date(visit.date);
+      const [visitHour] = visit.startTime.split(':').map(Number);
+      return isSameDay(visitDate, date) && visitHour === hour;
     });
   };
 

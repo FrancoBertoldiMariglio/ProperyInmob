@@ -19,31 +19,26 @@ interface LeadTableProps {
   onQuickAction: (lead: Lead, action: string) => void;
 }
 
-const statusColors: Record<
-  string,
-  'default' | 'success' | 'warning' | 'destructive' | 'secondary'
-> = {
+const statusColors: Record<string, 'default' | 'success' | 'warning' | 'error' | 'secondary'> = {
   new: 'default',
   contacted: 'warning',
-  qualified: 'secondary',
   visited: 'default',
   negotiating: 'warning',
-  closed_won: 'success',
-  closed_lost: 'destructive',
+  closed: 'success',
+  lost: 'error',
 };
 
 const statusLabels: Record<string, string> = {
   new: 'Nuevo',
   contacted: 'Contactado',
-  qualified: 'Calificado',
-  visited: 'Visitó',
+  visited: 'Visito',
   negotiating: 'Negociando',
-  closed_won: 'Cerrado',
-  closed_lost: 'Perdido',
+  closed: 'Cerrado',
+  lost: 'Perdido',
 };
 
-const priorityColors: Record<string, 'default' | 'success' | 'warning' | 'destructive'> = {
-  high: 'destructive',
+const priorityColors: Record<string, 'default' | 'success' | 'warning' | 'error'> = {
+  high: 'error',
   medium: 'warning',
   low: 'default',
 };
@@ -84,18 +79,18 @@ export function LeadTable({ leads, isLoading, onView, onQuickAction }: LeadTable
               <div className="font-medium text-gray-900 dark:text-gray-100">
                 {row.original.name}
               </div>
-              <div className="text-sm text-gray-500">{row.original.email}</div>
+              <div className="text-sm text-gray-500">{row.original.contact.email}</div>
             </div>
           </div>
         ),
       },
       {
-        accessorKey: 'property',
+        accessorKey: 'propertyTitle',
         header: 'Propiedad',
         cell: ({ row }) =>
-          row.original.property ? (
+          row.original.propertyTitle ? (
             <div className="max-w-[200px]">
-              <p className="truncate text-sm">{row.original.property.title}</p>
+              <p className="truncate text-sm">{row.original.propertyTitle}</p>
             </div>
           ) : (
             <span className="text-gray-400">-</span>
@@ -259,7 +254,7 @@ export function LeadTable({ leads, isLoading, onView, onQuickAction }: LeadTable
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <span className="text-sm">
-            Página {table.getState().pagination.pageIndex + 1} de {table.getPageCount()}
+            Pagina {table.getState().pagination.pageIndex + 1} de {table.getPageCount()}
           </span>
           <Button
             variant="outline"

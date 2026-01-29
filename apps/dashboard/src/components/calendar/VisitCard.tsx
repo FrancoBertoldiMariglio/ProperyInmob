@@ -1,4 +1,4 @@
-import { Clock, MapPin, User, Check, X } from 'lucide-react';
+import { Clock, MapPin, User } from 'lucide-react';
 import { Badge } from '@propery-agents/ui';
 import type { Visit } from '@propery-agents/api-client';
 
@@ -8,27 +8,20 @@ interface VisitCardProps {
   compact?: boolean;
 }
 
-const statusColors: Record<string, 'default' | 'success' | 'warning' | 'destructive'> = {
-  scheduled: 'default',
+const statusColors: Record<string, 'default' | 'success' | 'warning' | 'error'> = {
+  pending: 'default',
   confirmed: 'success',
   completed: 'success',
-  cancelled: 'destructive',
+  cancelled: 'error',
   no_show: 'warning',
 };
 
 const statusLabels: Record<string, string> = {
-  scheduled: 'Agendada',
+  pending: 'Pendiente',
   confirmed: 'Confirmada',
   completed: 'Completada',
   cancelled: 'Cancelada',
-  no_show: 'No asistió',
-};
-
-const formatTime = (date: string) => {
-  return new Date(date).toLocaleTimeString('es-AR', {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  no_show: 'No asistio',
 };
 
 export function VisitCard({ visit, onClick, compact = false }: VisitCardProps) {
@@ -47,9 +40,9 @@ export function VisitCard({ visit, onClick, compact = false }: VisitCardProps) {
           }
         `}
       >
-        <span className="font-medium">{formatTime(visit.scheduledAt)}</span>
+        <span className="font-medium">{visit.startTime}</span>
         {' - '}
-        {visit.lead?.name || 'Sin lead'}
+        {visit.leadName || 'Sin lead'}
       </button>
     );
   }
@@ -63,26 +56,24 @@ export function VisitCard({ visit, onClick, compact = false }: VisitCardProps) {
         <div className="flex items-center gap-2">
           <Clock className="h-4 w-4 text-gray-400" />
           <span className="font-medium">
-            {formatTime(visit.scheduledAt)}
+            {visit.startTime}
             {visit.duration && ` (${visit.duration} min)`}
           </span>
         </div>
         <Badge variant={statusColors[visit.status]}>{statusLabels[visit.status]}</Badge>
       </div>
 
-      {visit.property && (
+      {visit.propertyAddress && (
         <div className="mb-2 flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
           <MapPin className="h-4 w-4 text-gray-400" />
-          <span className="truncate">
-            {visit.property.address.street} {visit.property.address.number}
-          </span>
+          <span className="truncate">{visit.propertyAddress}</span>
         </div>
       )}
 
-      {visit.lead && (
+      {visit.leadName && (
         <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
           <User className="h-4 w-4 text-gray-400" />
-          <span>{visit.lead.name}</span>
+          <span>{visit.leadName}</span>
         </div>
       )}
 

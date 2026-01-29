@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { Plus } from 'lucide-react';
 import { Button } from '@propery-agents/ui';
 import { useProperties } from '@propery-agents/core';
@@ -23,7 +23,8 @@ function Properties() {
   const [filters, setFilters] = useState<Filters>({});
   const [showPublishModal, setShowPublishModal] = useState(false);
 
-  const { data: properties = [], isLoading, refetch } = useProperties(filters);
+  const { data: propertiesData, isLoading, refetch } = useProperties(filters);
+  const properties = useMemo(() => propertiesData?.data ?? [], [propertiesData]);
 
   const handleView = useCallback((property: Property) => {
     setSelectedProperty(property);

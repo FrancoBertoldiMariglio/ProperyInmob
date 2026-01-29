@@ -8,7 +8,6 @@ import {
   Trash2,
   Building2,
   Clock,
-  DollarSign,
   User,
 } from 'lucide-react';
 import { Button, Badge, Card, Avatar } from '@propery-agents/ui';
@@ -24,27 +23,22 @@ interface LeadDetailProps {
   onAddActivity: () => void;
 }
 
-const statusColors: Record<
-  string,
-  'default' | 'success' | 'warning' | 'destructive' | 'secondary'
-> = {
+const statusColors: Record<string, 'default' | 'success' | 'warning' | 'error' | 'secondary'> = {
   new: 'default',
   contacted: 'warning',
-  qualified: 'secondary',
   visited: 'default',
   negotiating: 'warning',
-  closed_won: 'success',
-  closed_lost: 'destructive',
+  closed: 'success',
+  lost: 'error',
 };
 
 const statusLabels: Record<string, string> = {
   new: 'Nuevo',
   contacted: 'Contactado',
-  qualified: 'Calificado',
-  visited: 'Visitó',
+  visited: 'Visito',
   negotiating: 'Negociando',
-  closed_won: 'Cerrado',
-  closed_lost: 'Perdido',
+  closed: 'Cerrado',
+  lost: 'Perdido',
 };
 
 const priorityLabels: Record<string, string> = {
@@ -59,6 +53,7 @@ const activityIcons: Record<string, React.ReactNode> = {
   whatsapp: <MessageCircle className="h-4 w-4" />,
   visit: <Building2 className="h-4 w-4" />,
   note: <Edit className="h-4 w-4" />,
+  status_change: <Clock className="h-4 w-4" />,
 };
 
 const formatDate = (date: string) => {
@@ -102,7 +97,7 @@ export function LeadDetail({
               <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{lead.name}</h1>
               <Badge variant={statusColors[lead.status]}>{statusLabels[lead.status]}</Badge>
             </div>
-            <p className="text-gray-500">{lead.email}</p>
+            <p className="text-gray-500">{lead.contact.email}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -123,14 +118,14 @@ export function LeadDetail({
           {/* Contact Actions */}
           <Card className="p-4">
             <div className="flex flex-wrap gap-3">
-              <Button className="flex-1" onClick={() => window.open(`tel:${lead.phone}`)}>
+              <Button className="flex-1" onClick={() => window.open(`tel:${lead.contact.phone}`)}>
                 <Phone className="mr-2 h-4 w-4" />
                 Llamar
               </Button>
               <Button
                 variant="outline"
                 className="flex-1"
-                onClick={() => window.open(`mailto:${lead.email}`)}
+                onClick={() => window.open(`mailto:${lead.contact.email}`)}
               >
                 <Mail className="mr-2 h-4 w-4" />
                 Email
@@ -138,7 +133,9 @@ export function LeadDetail({
               <Button
                 variant="outline"
                 className="flex-1"
-                onClick={() => window.open(`https://wa.me/${lead.phone?.replace(/\D/g, '')}`)}
+                onClick={() =>
+                  window.open(`https://wa.me/${lead.contact.phone?.replace(/\D/g, '')}`)
+                }
               >
                 <MessageCircle className="mr-2 h-4 w-4" />
                 WhatsApp
@@ -195,9 +192,9 @@ export function LeadDetail({
                           {formatDate(activity.createdAt)}
                         </span>
                       </div>
-                      {activity.notes && (
+                      {activity.description && (
                         <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                          {activity.notes}
+                          {activity.description}
                         </p>
                       )}
                     </div>
@@ -222,16 +219,16 @@ export function LeadDetail({
         <div className="space-y-6">
           {/* Contact Info */}
           <Card className="p-6">
-            <h3 className="mb-4 font-semibold">Información de contacto</h3>
+            <h3 className="mb-4 font-semibold">Informacion de contacto</h3>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-gray-400" />
-                <span className="text-sm">{lead.email}</span>
+                <span className="text-sm">{lead.contact.email}</span>
               </div>
-              {lead.phone && (
+              {lead.contact.phone && (
                 <div className="flex items-center gap-3">
                   <Phone className="h-4 w-4 text-gray-400" />
-                  <span className="text-sm">{lead.phone}</span>
+                  <span className="text-sm">{lead.contact.phone}</span>
                 </div>
               )}
               <div className="flex items-center gap-3">
@@ -248,24 +245,22 @@ export function LeadDetail({
           {/* Qualification */}
           {lead.qualification && (
             <Card className="p-6">
-              <h3 className="mb-4 font-semibold">Calificación</h3>
+              <h3 className="mb-4 font-semibold">Calificacion</h3>
               <div className="space-y-3">
                 {lead.qualification.budget && (
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-500">Presupuesto</span>
                     <span className="font-medium">
-                      {formatPrice(lead.qualification.budget, 'USD')}
+                      {formatPrice(lead.qualification.budget, lead.qualification.budgetCurrency)}
                     </span>
                   </div>
                 )}
-                {lead.qualification.financing !== undefined && (
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500">Financiación</span>
-                    <Badge variant={lead.qualification.financing ? 'success' : 'secondary'}>
-                      {lead.qualification.financing ? 'Sí' : 'No'}
-                    </Badge>
-                  </div>
-                )}
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-500">Financiacion</span>
+                  <Badge variant={lead.qualification.hasFinancing ? 'success' : 'secondary'}>
+                    {lead.qualification.hasFinancing ? 'Si' : 'No'}
+                  </Badge>
+                </div>
                 {lead.qualification.timeline && (
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-500">Timeline</span>
@@ -277,17 +272,11 @@ export function LeadDetail({
           )}
 
           {/* Property */}
-          {lead.property && (
+          {lead.propertyTitle && (
             <Card className="p-6">
-              <h3 className="mb-4 font-semibold">Propiedad de interés</h3>
+              <h3 className="mb-4 font-semibold">Propiedad de interes</h3>
               <div className="space-y-2">
-                <p className="font-medium">{lead.property.title}</p>
-                <p className="text-sm text-gray-500">
-                  {lead.property.address.street} {lead.property.address.number}
-                </p>
-                <p className="text-lg font-bold text-indigo-600">
-                  {formatPrice(lead.property.price, lead.property.currency)}
-                </p>
+                <p className="font-medium">{lead.propertyTitle}</p>
               </div>
             </Card>
           )}

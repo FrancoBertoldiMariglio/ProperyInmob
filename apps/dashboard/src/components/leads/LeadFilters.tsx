@@ -1,4 +1,4 @@
-import { Search, Filter, X, LayoutGrid, List } from 'lucide-react';
+import { Search, X, LayoutGrid, List } from 'lucide-react';
 import { Button, Input, Select } from '@propery-agents/ui';
 import type { LeadStatus, LeadSource, LeadPriority } from '@propery-agents/api-client';
 
@@ -22,11 +22,10 @@ const statusOptions = [
   { value: '', label: 'Todos los estados' },
   { value: 'new', label: 'Nuevos' },
   { value: 'contacted', label: 'Contactados' },
-  { value: 'qualified', label: 'Calificados' },
   { value: 'visited', label: 'Visitaron' },
   { value: 'negotiating', label: 'Negociando' },
-  { value: 'closed_won', label: 'Cerrados' },
-  { value: 'closed_lost', label: 'Perdidos' },
+  { value: 'closed', label: 'Cerrados' },
+  { value: 'lost', label: 'Perdidos' },
 ];
 
 const sourceOptions = [
@@ -34,12 +33,12 @@ const sourceOptions = [
   { value: 'zonaprop', label: 'ZonaProp' },
   { value: 'argenprop', label: 'ArgenProp' },
   { value: 'mercadolibre', label: 'MercadoLibre' },
-  { value: 'instagram', label: 'Instagram' },
-  { value: 'facebook', label: 'Facebook' },
-  { value: 'whatsapp', label: 'WhatsApp' },
-  { value: 'referral', label: 'Referido' },
-  { value: 'direct', label: 'Directo' },
+  { value: 'properati', label: 'Properati' },
   { value: 'website', label: 'Web' },
+  { value: 'referral', label: 'Referido' },
+  { value: 'walk_in', label: 'Walk-in' },
+  { value: 'phone', label: 'Telefono' },
+  { value: 'other', label: 'Otro' },
 ];
 
 const priorityOptions = [
@@ -69,7 +68,7 @@ export function LeadFilters({
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
         <Input
           type="text"
-          placeholder="Buscar por nombre, email, teléfono..."
+          placeholder="Buscar por nombre, email, telefono..."
           value={filters.search || ''}
           onChange={(e) => updateFilter('search', e.target.value)}
           className="pl-10"
@@ -79,7 +78,7 @@ export function LeadFilters({
       {/* Status */}
       <Select
         value={filters.status || ''}
-        onValueChange={(value) => updateFilter('status', value as LeadStatus)}
+        onChange={(e) => updateFilter('status', e.target.value as LeadStatus)}
         placeholder="Estado"
         options={statusOptions}
         className="w-[160px]"
@@ -88,7 +87,7 @@ export function LeadFilters({
       {/* Source */}
       <Select
         value={filters.source || ''}
-        onValueChange={(value) => updateFilter('source', value as LeadSource)}
+        onChange={(e) => updateFilter('source', e.target.value as LeadSource)}
         placeholder="Fuente"
         options={sourceOptions}
         className="w-[160px]"
@@ -97,7 +96,7 @@ export function LeadFilters({
       {/* Priority */}
       <Select
         value={filters.priority || ''}
-        onValueChange={(value) => updateFilter('priority', value as LeadPriority)}
+        onChange={(e) => updateFilter('priority', e.target.value as LeadPriority)}
         placeholder="Prioridad"
         options={priorityOptions}
         className="w-[160px]"

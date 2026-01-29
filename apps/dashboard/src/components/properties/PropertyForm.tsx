@@ -5,7 +5,6 @@ import { z } from 'zod';
 import { X } from 'lucide-react';
 import { Button, Input, Select, Card } from '@propery-agents/ui';
 import type { Property, CreatePropertyInput } from '@propery-agents/api-client';
-import { ImageUploader } from './ImageUploader';
 
 const propertySchema = z.object({
   type: z.enum(['apartment', 'house', 'ph', 'land', 'office', 'commercial', 'warehouse', 'garage']),
@@ -17,15 +16,16 @@ const propertySchema = z.object({
   expenses: z.number().optional(),
   address: z.object({
     street: z.string().min(1, 'La calle es requerida'),
-    number: z.string().min(1, 'El número es requerido'),
+    number: z.string().min(1, 'El numero es requerido'),
     floor: z.string().optional(),
     apartment: z.string().optional(),
     neighborhood: z.string().min(1, 'El barrio es requerido'),
     city: z.string().min(1, 'La ciudad es requerida'),
-    state: z.string().min(1, 'La provincia es requerida'),
-    zipCode: z.string().optional(),
-    latitude: z.number().optional(),
-    longitude: z.number().optional(),
+    province: z.string().min(1, 'La provincia es requerida'),
+    postalCode: z.string().min(0),
+    country: z.string().min(0),
+    lat: z.number().optional(),
+    lng: z.number().optional(),
   }),
   features: z.object({
     totalArea: z.number().min(1, 'La superficie total es requerida'),
@@ -124,7 +124,7 @@ export function PropertyForm({ property, onSubmit, onCancel, isSubmitting }: Pro
     formState: { errors },
     reset,
   } = useForm<PropertyFormData>({
-    resolver: zodResolver(propertySchema),
+    resolver: zodResolver(propertySchema) as any,
     defaultValues: {
       type: 'apartment',
       operation: 'sale',
@@ -155,7 +155,9 @@ export function PropertyForm({ property, onSubmit, onCancel, isSubmitting }: Pro
         number: '',
         neighborhood: '',
         city: 'Buenos Aires',
-        state: 'CABA',
+        province: 'CABA',
+        postalCode: '',
+        country: 'Argentina',
       },
     },
   });
@@ -182,12 +184,12 @@ export function PropertyForm({ property, onSubmit, onCancel, isSubmitting }: Pro
   const watchedType = watch('type');
   const watchedOperation = watch('operation');
 
-  const onFormSubmit = (data: PropertyFormData) => {
+  const onFormSubmit = (data: unknown) => {
     onSubmit(data as CreatePropertyInput);
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onFormSubmit as any)} className="space-y-6">
       {/* Basic Info */}
       <Card className="p-6">
         <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -198,7 +200,7 @@ export function PropertyForm({ property, onSubmit, onCancel, isSubmitting }: Pro
             <label className="mb-1 block text-sm font-medium">Tipo de propiedad *</label>
             <Select
               value={watchedType}
-              onValueChange={(value) => setValue('type', value as PropertyFormData['type'])}
+              onChange={(e) => setValue('type', e.target.value as PropertyFormData['type'])}
               options={propertyTypes}
             />
             {errors.type && <span className="text-sm text-red-500">{errors.type.message}</span>}
@@ -208,8 +210,8 @@ export function PropertyForm({ property, onSubmit, onCancel, isSubmitting }: Pro
             <label className="mb-1 block text-sm font-medium">Operación *</label>
             <Select
               value={watchedOperation}
-              onValueChange={(value) =>
-                setValue('operation', value as PropertyFormData['operation'])
+              onChange={(e) =>
+                setValue('operation', e.target.value as PropertyFormData['operation'])
               }
               options={operationTypes}
             />
@@ -219,8 +221,11 @@ export function PropertyForm({ property, onSubmit, onCancel, isSubmitting }: Pro
             <label className="mb-1 block text-sm font-medium">Estado</label>
             <Select
               value={watch('features.condition')}
-              onValueChange={(value) =>
-                setValue('features.condition', value as PropertyFormData['features']['condition'])
+              onChange={(e) =>
+                setValue(
+                  'features.condition',
+                  e.target.value as PropertyFormData['features']['condition']
+                )
               }
               options={conditionOptions}
             />
@@ -268,7 +273,7 @@ export function PropertyForm({ property, onSubmit, onCancel, isSubmitting }: Pro
             <label className="mb-1 block text-sm font-medium">Moneda</label>
             <Select
               value={watch('currency')}
-              onValueChange={(value) => setValue('currency', value as 'USD' | 'ARS')}
+              onChange={(e) => setValue('currency', e.target.value as 'USD' | 'ARS')}
               options={[
                 { value: 'USD', label: 'USD' },
                 { value: 'ARS', label: 'ARS' },
@@ -324,12 +329,12 @@ export function PropertyForm({ property, onSubmit, onCancel, isSubmitting }: Pro
 
           <div>
             <label className="mb-1 block text-sm font-medium">Provincia *</label>
-            <Input {...register('address.state')} placeholder="CABA" />
+            <Input {...register('address.province')} placeholder="CABA" />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium">Código Postal</label>
-            <Input {...register('address.zipCode')} placeholder="1414" />
+            <label className="mb-1 block text-sm font-medium">Codigo Postal</label>
+            <Input {...register('address.postalCode')} placeholder="1414" />
           </div>
         </div>
       </Card>

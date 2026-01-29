@@ -65,7 +65,7 @@ export const mockKPIs: AgentKPIs = {
 };
 
 // Generate 12 months of market trends
-const generateMarketTrends = (basePrice: number, zone: string): MarketTrend[] => {
+const generateMarketTrends = (basePrice: number, _zone: string): MarketTrend[] => {
   const trends: MarketTrend[] = [];
   const now = new Date();
 

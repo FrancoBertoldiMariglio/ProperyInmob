@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import Chart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
-import { Building2, Clock } from 'lucide-react';
+import { Clock } from 'lucide-react';
 
 interface PropertiesOverviewWidgetProps {
   className?: string;

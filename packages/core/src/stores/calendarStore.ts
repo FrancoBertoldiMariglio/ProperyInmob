@@ -29,7 +29,7 @@ interface CalendarState {
   closeScheduleModal: () => void;
 }
 
-export const useCalendarStore = create<CalendarState>((set, get) => ({
+export const useCalendarStore = create<CalendarState>((set) => ({
   // Initial state
   currentDate: new Date(),
   view: 'month',

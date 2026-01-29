@@ -1,8 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { Plus } from 'lucide-react';
 import { Button } from '@propery-agents/ui';
-import { useCalendar, useProperties, useLeads } from '@propery-agents/core';
-import type { Visit } from '@propery-agents/api-client';
+import { useVisits, useProperties, useLeads } from '@propery-agents/core';
+import type { Visit, CreateVisitInput } from '@propery-agents/api-client';
 import { CalendarHeader, MonthView, WeekView, DayView, ScheduleModal } from '@/components/calendar';
 
 type ViewMode = 'month' | 'week' | 'day';
@@ -15,12 +15,21 @@ function Calendar() {
   const [initialDate, setInitialDate] = useState<Date | undefined>();
   const [initialHour, setInitialHour] = useState<number | undefined>();
 
-  const { data: visits = [], refetch } = useCalendar({
-    startDate: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).toISOString(),
-    endDate: new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).toISOString(),
-  });
-  const { data: properties = [] } = useProperties({});
-  const { data: leads = [] } = useLeads({});
+  const startDate = useMemo(
+    () => new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).toISOString(),
+    [currentDate]
+  );
+  const endDate = useMemo(
+    () => new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).toISOString(),
+    [currentDate]
+  );
+
+  const { data: visits = [], refetch } = useVisits(startDate, endDate);
+  const { data: propertiesData } = useProperties({});
+  const { data: leadsData } = useLeads({});
+
+  const properties = useMemo(() => propertiesData?.data ?? [], [propertiesData]);
+  const leads = useMemo(() => leadsData?.data ?? [], [leadsData]);
 
   const handlePrevious = useCallback(() => {
     setCurrentDate((prev) => {
@@ -81,13 +90,7 @@ function Calendar() {
   }, []);
 
   const handleSubmitVisit = useCallback(
-    (data: {
-      propertyId: string;
-      leadId: string;
-      scheduledAt: string;
-      duration: number;
-      notes?: string;
-    }) => {
+    (data: CreateVisitInput) => {
       // TODO: Implement create/update mutation
       console.log('Submit visit:', data);
       setShowScheduleModal(false);
@@ -98,7 +101,7 @@ function Calendar() {
 
   const handleDeleteVisit = useCallback(
     (visit: Visit) => {
-      if (window.confirm('¿Eliminar esta visita?')) {
+      if (window.confirm('Eliminar esta visita?')) {
         // TODO: Implement delete mutation
         console.log('Delete visit:', visit.id);
         setShowScheduleModal(false);

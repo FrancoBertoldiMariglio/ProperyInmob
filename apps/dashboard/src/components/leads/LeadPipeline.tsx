@@ -32,11 +32,10 @@ interface ColumnConfig {
 const columns: ColumnConfig[] = [
   { status: 'new', title: 'Nuevos', color: 'bg-blue-500' },
   { status: 'contacted', title: 'Contactados', color: 'bg-yellow-500' },
-  { status: 'qualified', title: 'Calificados', color: 'bg-purple-500' },
   { status: 'visited', title: 'Visitaron', color: 'bg-cyan-500' },
   { status: 'negotiating', title: 'Negociando', color: 'bg-orange-500' },
-  { status: 'closed_won', title: 'Cerrados', color: 'bg-green-500' },
-  { status: 'closed_lost', title: 'Perdidos', color: 'bg-gray-500' },
+  { status: 'closed', title: 'Cerrados', color: 'bg-green-500' },
+  { status: 'lost', title: 'Perdidos', color: 'bg-gray-500' },
 ];
 
 export function LeadPipeline({
@@ -68,11 +67,10 @@ export function LeadPipeline({
     const grouped: Record<LeadStatus, Lead[]> = {
       new: [],
       contacted: [],
-      qualified: [],
       visited: [],
       negotiating: [],
-      closed_won: [],
-      closed_lost: [],
+      closed: [],
+      lost: [],
     };
 
     localLeads.forEach((lead) => {

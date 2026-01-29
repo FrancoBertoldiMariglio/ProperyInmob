@@ -36,10 +36,7 @@ interface PropertyTableProps {
   onBulkAction?: (action: string, properties: Property[]) => void;
 }
 
-const statusColors: Record<
-  string,
-  'default' | 'success' | 'warning' | 'destructive' | 'secondary'
-> = {
+const statusColors: Record<string, 'default' | 'success' | 'warning' | 'error' | 'secondary'> = {
   active: 'success',
   paused: 'warning',
   draft: 'secondary',

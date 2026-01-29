@@ -27,10 +27,10 @@ interface PropertyDetailProps {
   onDelete: () => void;
 }
 
-const statusColors: Record<string, 'default' | 'success' | 'warning' | 'destructive'> = {
+const statusColors: Record<string, 'default' | 'success' | 'warning' | 'error'> = {
   active: 'success',
   paused: 'warning',
-  draft: 'secondary',
+  draft: 'default',
   sold: 'default',
   rented: 'default',
   reserved: 'warning',
@@ -363,11 +363,11 @@ export function PropertyDetail({
               <h3 className="mb-4 font-semibold text-gray-900 dark:text-gray-100">Propietario</h3>
               <div className="space-y-2">
                 <p className="font-medium">{property.owner.name}</p>
-                {property.owner.email && (
-                  <p className="text-sm text-gray-500">{property.owner.email}</p>
+                {property.owner.contact?.email && (
+                  <p className="text-sm text-gray-500">{property.owner.contact.email}</p>
                 )}
-                {property.owner.phone && (
-                  <p className="text-sm text-gray-500">{property.owner.phone}</p>
+                {property.owner.contact?.phone && (
+                  <p className="text-sm text-gray-500">{property.owner.contact.phone}</p>
                 )}
               </div>
             </Card>
@@ -389,21 +389,21 @@ export function PropertyDetail({
             <h3 className="mb-4 font-semibold text-gray-900 dark:text-gray-100">Publicaciones</h3>
             {property.portals.length > 0 ? (
               <div className="space-y-3">
-                {property.portals.map((portal) => (
-                  <div key={portal.portalId} className="flex items-center justify-between text-sm">
-                    <span className="capitalize">{portal.portalId}</span>
+                {property.portals.map((pub) => (
+                  <div key={pub.portal} className="flex items-center justify-between text-sm">
+                    <span className="capitalize">{pub.portal}</span>
                     <Badge
                       variant={
-                        portal.status === 'published'
+                        pub.status === 'published'
                           ? 'success'
-                          : portal.status === 'pending'
+                          : pub.status === 'pending'
                             ? 'warning'
-                            : 'destructive'
+                            : 'error'
                       }
                     >
-                      {portal.status === 'published'
+                      {pub.status === 'published'
                         ? 'Activa'
-                        : portal.status === 'pending'
+                        : pub.status === 'pending'
                           ? 'Pendiente'
                           : 'Error'}
                     </Badge>

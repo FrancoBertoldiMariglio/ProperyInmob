@@ -45,7 +45,7 @@ const initialFormData: Partial<CreatePropertyInput> = {
   status: 'draft',
 };
 
-export const usePropertyFormStore = create<PropertyFormState>((set, get) => ({
+export const usePropertyFormStore = create<PropertyFormState>((set) => ({
   // Initial state
   formData: initialFormData,
   currentStep: 0,

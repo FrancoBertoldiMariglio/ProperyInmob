@@ -21,7 +21,7 @@ const propertyTypes: { value: PropertyType; label: string }[] = [
   { value: 'land', label: 'Terreno' },
   { value: 'office', label: 'Oficina' },
   { value: 'commercial', label: 'Local' },
-  { value: 'warehouse', label: 'Galpón' },
+  { value: 'warehouse', label: 'Galpon' },
   { value: 'garage', label: 'Cochera' },
 ];
 
@@ -67,7 +67,7 @@ export function PropertyFilters({
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
           <Input
             type="text"
-            placeholder="Buscar por dirección, título..."
+            placeholder="Buscar por direccion, titulo..."
             value={filters.search || ''}
             onChange={(e) => updateFilter('search', e.target.value)}
             className="pl-10"
@@ -77,7 +77,7 @@ export function PropertyFilters({
         {/* Type */}
         <Select
           value={(filters.type as string) || ''}
-          onValueChange={(value) => updateFilter('type', value as PropertyType)}
+          onChange={(e) => updateFilter('type', e.target.value as PropertyType)}
           placeholder="Tipo"
           options={[{ value: '', label: 'Todos los tipos' }, ...propertyTypes]}
           className="w-[160px]"
@@ -86,8 +86,8 @@ export function PropertyFilters({
         {/* Operation */}
         <Select
           value={(filters.operation as string) || ''}
-          onValueChange={(value) => updateFilter('operation', value as OperationType)}
-          placeholder="Operación"
+          onChange={(e) => updateFilter('operation', e.target.value as OperationType)}
+          placeholder="Operacion"
           options={[{ value: '', label: 'Todas' }, ...operationTypes]}
           className="w-[180px]"
         />
@@ -95,7 +95,7 @@ export function PropertyFilters({
         {/* Status */}
         <Select
           value={(filters.status as string) || ''}
-          onValueChange={(value) => updateFilter('status', value as PropertyStatus)}
+          onChange={(e) => updateFilter('status', e.target.value as PropertyStatus)}
           placeholder="Estado"
           options={[{ value: '', label: 'Todos' }, ...statusOptions]}
           className="w-[150px]"
@@ -132,7 +132,7 @@ export function PropertyFilters({
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Precio mínimo (USD)
+                Precio minimo (USD)
               </label>
               <Input
                 type="number"
@@ -145,7 +145,7 @@ export function PropertyFilters({
             </div>
             <div>
               <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Precio máximo (USD)
+                Precio maximo (USD)
               </label>
               <Input
                 type="number"
@@ -158,7 +158,7 @@ export function PropertyFilters({
             </div>
             <div>
               <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Superficie mínima (m²)
+                Superficie minima (m2)
               </label>
               <Input
                 type="number"
@@ -175,8 +175,8 @@ export function PropertyFilters({
               </label>
               <Select
                 value={filters.bedrooms?.toString() || ''}
-                onValueChange={(value) =>
-                  updateFilter('bedrooms', value ? Number(value) : undefined)
+                onChange={(e) =>
+                  updateFilter('bedrooms', e.target.value ? Number(e.target.value) : undefined)
                 }
                 placeholder="Cualquiera"
                 options={[

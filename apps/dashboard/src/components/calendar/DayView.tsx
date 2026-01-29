@@ -18,13 +18,17 @@ const isSameDay = (d1: Date, d2: Date): boolean => {
   );
 };
 
+const parseStartTime = (startTime: string): number => {
+  const [hours] = startTime.split(':').map(Number);
+  return hours;
+};
+
 export function DayView({ currentDate, visits, onVisitClick, onTimeSlotClick }: DayViewProps) {
-  const dayVisits = visits.filter((visit) => isSameDay(new Date(visit.scheduledAt), currentDate));
+  const dayVisits = visits.filter((visit) => isSameDay(new Date(visit.date), currentDate));
 
   const getVisitsForHour = (hour: number): Visit[] => {
     return dayVisits.filter((visit) => {
-      const visitDate = new Date(visit.scheduledAt);
-      return visitDate.getHours() === hour;
+      return parseStartTime(visit.startTime) === hour;
     });
   };
 
@@ -59,7 +63,7 @@ export function DayView({ currentDate, visits, onVisitClick, onTimeSlotClick }: 
       {/* Agenda Sidebar */}
       <div className="space-y-4">
         <h3 className="font-semibold text-gray-900 dark:text-gray-100">
-          Agenda del día ({dayVisits.length} visitas)
+          Agenda del dia ({dayVisits.length} visitas)
         </h3>
 
         {dayVisits.length === 0 ? (
@@ -69,7 +73,7 @@ export function DayView({ currentDate, visits, onVisitClick, onTimeSlotClick }: 
         ) : (
           <div className="space-y-3">
             {dayVisits
-              .sort((a, b) => new Date(a.scheduledAt).getTime() - new Date(b.scheduledAt).getTime())
+              .sort((a, b) => a.startTime.localeCompare(b.startTime))
               .map((visit) => (
                 <VisitCard key={visit.id} visit={visit} onClick={onVisitClick} />
               ))}

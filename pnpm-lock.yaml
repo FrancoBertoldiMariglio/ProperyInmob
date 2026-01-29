@@ -56,6 +56,9 @@ importers:
       '@propery-agents/api-client':
         specifier: workspace:*
         version: link:../../packages/api-client
+      '@propery-agents/config':
+        specifier: workspace:*
+        version: link:../../packages/config
       '@propery-agents/core':
         specifier: workspace:*
         version: link:../../packages/core

@@ -15,7 +15,7 @@ export const valuatorApi = {
     return mockValuations.find((v) => v.id === id) || null;
   },
 
-  async getComparables(propertyId: string): Promise<Comparable[]> {
+  async getComparables(_propertyId: string): Promise<Comparable[]> {
     await sleep(500);
     // Return a subset of comparables for the given property
     return mockComparables.slice(0, 8);

@@ -9,8 +9,8 @@ Sesión actual: 1 (En progreso)
 
 ## Estado General
 
-- Módulo actual: 5 de 10 (en progreso)
-- Progreso global: 50%
+- Módulo actual: 6 de 10 (en progreso)
+- Progreso global: 55%
 - Apps: Dashboard (React/Vite) + Mobile (React Native/Expo)
 
 ---
@@ -211,40 +211,42 @@ Sesión actual: 1 (En progreso)
 
 **Estimación:** 8-10 horas | **Dependencias:** Módulo 1
 
-- [ ] 6.1 Mock data: histórico de mercado por zona (12 meses)
-- [ ] 6.2 Mock data: demanda por tipo/zona
-- [ ] 6.3 Analytics page layout
-- [ ] 6.4 ZoneSelector component (mapa + dropdown)
-- [ ] 6.5 TrendChart (ApexCharts):
-  - [ ] Precio promedio por m² en el tiempo
-  - [ ] Línea de venta + línea de alquiler
+- [x] 6.1 Mock data: histórico de mercado por zona (12 meses)
+- [x] 6.2 Mock data: demanda por tipo/zona
+- [x] 6.3 Analytics page layout
+- [x] 6.4 ZoneSelector component (tabs + dropdown)
+- [x] 6.5 TrendChart (ApexCharts):
+  - [x] Precio promedio por m² en el tiempo
+  - [x] Línea de venta + línea de alquiler
   - [ ] Annotations de eventos de mercado
-- [ ] 6.6 DemandIndicator:
-  - [ ] Gauge o semáforo de demanda
-  - [ ] Búsquedas por tipo de propiedad
-- [ ] 6.7 SupplyChart:
-  - [ ] Propiedades activas por tipo (bar chart)
-  - [ ] Tendencia de publicaciones
-- [ ] 6.8 PriceDistribution:
-  - [ ] Histograma de precios
-  - [ ] Percentiles
+- [x] 6.6 DemandIndicator:
+  - [x] Gauge radial de demanda (0-100)
+  - [x] Donut de tipos más buscados
+  - [x] Stats de tiempo promedio y ratio precio/alquiler
+- [x] 6.7 SupplyChart:
+  - [x] Propiedades activas por tipo (bar chart)
+  - [x] Nuevas publicaciones y vendidas/alquiladas
+- [x] 6.8 PriceDistribution:
+  - [x] Histograma de precios por rangos
+  - [x] Marcadores de promedio y mediana
 - [ ] 6.9 ZoneHeatmap (mapa):
   - [ ] Mapa de calor por precio/m²
   - [ ] Toggle por operación
-- [ ] 6.10 MarketComparison:
-  - [ ] Comparar hasta 3 zonas
-  - [ ] Tabla side-by-side
-- [ ] 6.11 DaysOnMarketChart:
-  - [ ] Promedio por tipo
-  - [ ] Tendencia
+- [x] 6.10 ZoneComparison:
+  - [x] Comparar hasta 5 zonas
+  - [x] Tabla comparativa con highlights
+  - [x] Agregar/remover zonas dinámicamente
+- [x] 6.11 DaysOnMarketChart:
+  - [x] Tendencia de días en mercado (area chart)
+  - [x] Indicador de mejora/empeoramiento
 - [ ] 6.12 MarketInsights AI:
   - [ ] Resumen generado por AI del estado del mercado
 - [ ] 6.13 Export a PDF/Excel
-- [ ] 6.14 Hook `useAnalytics`
-- [ ] 6.15 Responsive charts
+- [x] 6.14 Hook `useAnalytics` (useMarketTrends, usePriceHistory, useDemandIndicators, useComparativeAnalysis)
+- [x] 6.15 Responsive charts
 - [ ] 6.16 Unit tests
 
-**Status:** NOT_STARTED
+**Status:** IN_PROGRESS (11/16 completadas - pendiente: ZoneHeatmap, AI Insights, Export, tests)
 
 ---
 

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Lead, LeadStatus } from '@propery-agents/api-client';
+import type { LeadStatus } from '@propery-agents/api-client';
 
 interface LeadPipelineState {
   // Pipeline columns

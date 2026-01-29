@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
-import { cn } from '@propery-agents/config';
 
 const routeLabels: Record<string, string> = {
   properties: 'Propiedades',
@@ -38,7 +37,7 @@ export function Breadcrumb() {
         <Home className="w-4 h-4" />
       </Link>
 
-      {breadcrumbs.map((crumb, index) => (
+      {breadcrumbs.map((crumb) => (
         <div key={crumb.path} className="flex items-center">
           <ChevronRight className="w-4 h-4 mx-2" />
           {crumb.isLast ? (

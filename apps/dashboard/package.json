@@ -20,6 +20,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@propery-agents/ai": "workspace:*",
     "@propery-agents/api-client": "workspace:*",
+    "@propery-agents/config": "workspace:*",
     "@propery-agents/core": "workspace:*",
     "@propery-agents/ui": "workspace:*",
     "@tanstack/react-query": "^5.74.0",

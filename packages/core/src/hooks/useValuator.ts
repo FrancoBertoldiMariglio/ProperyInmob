@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import type { ValuationInput, Valuation } from '@propery-agents/api-client';
+import type { ValuationInput } from '@propery-agents/api-client';
 import { valuatorApi } from '@propery-agents/api-client';
 
 export const valuatorKeys = {

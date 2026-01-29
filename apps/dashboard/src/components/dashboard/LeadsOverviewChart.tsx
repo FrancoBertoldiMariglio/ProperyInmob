@@ -58,7 +58,7 @@ export function LeadsOverviewChart({ className }: LeadsOverviewChartProps) {
       position: 'top',
       horizontalAlign: 'left',
       labels: { colors: '#6b7280' },
-      markers: { radius: 4 },
+      markers: { size: 6 },
     },
     tooltip: {
       theme: 'light',

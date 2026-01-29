@@ -55,7 +55,7 @@ export function MonthView({ currentDate, visits, onVisitClick, onDayClick }: Mon
   const weekDays = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
 
   const getVisitsForDay = (date: Date): Visit[] => {
-    return visits.filter((visit) => isSameDay(new Date(visit.scheduledAt), date));
+    return visits.filter((visit) => isSameDay(new Date(visit.date), date));
   };
 
   return (
