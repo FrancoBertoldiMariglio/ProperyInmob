@@ -9,8 +9,8 @@ Sesión actual: 1 (En progreso)
 
 ## Estado General
 
-- Módulo actual: 4 de 10 (en progreso)
-- Progreso global: 40%
+- Módulo actual: 5 de 10 (en progreso)
+- Progreso global: 50%
 - Apps: Dashboard (React/Vite) + Mobile (React Native/Expo)
 
 ---
@@ -176,34 +176,34 @@ Sesión actual: 1 (En progreso)
 
 **Estimación:** 6-8 horas | **Dependencias:** Módulos 1, 3, 4
 
-- [ ] 5.1 Tipos TypeScript: Visit, VisitStatus
-- [ ] 5.2 Mock data: visitas programadas
-- [ ] 5.3 VisitCalendar component:
-  - [ ] Vista mensual
-  - [ ] Vista semanal
-  - [ ] Vista diaria
-  - [ ] Navegación entre fechas
-- [ ] 5.4 VisitCard en calendario:
-  - [ ] Hora + duración
-  - [ ] Propiedad (dirección resumida)
-  - [ ] Lead (nombre)
-  - [ ] Estado (pendiente, confirmada, completada, cancelada)
-- [ ] 5.5 ScheduleModal:
-  - [ ] Selección de propiedad
-  - [ ] Selección de lead
-  - [ ] Fecha y hora
-  - [ ] Duración estimada
-  - [ ] Notas
+- [x] 5.1 Tipos TypeScript: Visit, VisitStatus
+- [x] 5.2 Mock data: visitas programadas
+- [x] 5.3 VisitCalendar component:
+  - [x] Vista mensual
+  - [x] Vista semanal
+  - [x] Vista diaria
+  - [x] Navegación entre fechas
+- [x] 5.4 VisitCard en calendario:
+  - [x] Hora + duración
+  - [x] Propiedad (dirección resumida)
+  - [x] Lead (nombre)
+  - [x] Estado (pendiente, confirmada, completada, cancelada)
+- [x] 5.5 ScheduleModal:
+  - [x] Selección de propiedad
+  - [x] Selección de lead
+  - [x] Fecha y hora
+  - [x] Duración estimada
+  - [x] Notas
 - [ ] 5.6 Drag & drop para reagendar
-- [ ] 5.7 Vista de agenda del día (lista)
-- [ ] 5.8 Confirmación/cancelación de visita
+- [x] 5.7 Vista de agenda del día (lista)
+- [x] 5.8 Confirmación/cancelación de visita
 - [ ] 5.9 Recordatorios (notificaciones)
 - [ ] 5.10 Integración con LeadDetail (mostrar visita programada)
-- [ ] 5.11 Hook `useCalendar`
-- [ ] 5.12 Store `calendarStore`
+- [x] 5.11 Hook `useCalendar`
+- [x] 5.12 Store `calendarStore`
 - [ ] 5.13 Unit tests
 
-**Status:** NOT_STARTED
+**Status:** IN_PROGRESS (10/13 completadas)
 
 ---
 
