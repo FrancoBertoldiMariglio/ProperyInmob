@@ -10,7 +10,7 @@ Sesión actual: 1 (En progreso)
 ## Estado General
 
 - Módulo actual: 2 de 10 (casi completo)
-- Progreso global: 18%
+- Progreso global: 20%
 - Apps: Dashboard (React/Vite) + Mobile (React Native/Expo)
 
 ---
@@ -24,7 +24,7 @@ Sesión actual: 1 (En progreso)
 - [x] 1.1 Inicializar monorepo con Turborepo + pnpm
 - [x] 1.2 Configurar React + Vite 6 - apps/dashboard
 - [x] 1.3 Configurar React Router DOM v7
-- [ ] 1.4 Configurar Expo SDK 52 + Expo Router - apps/mobile
+- [x] 1.4 Configurar Expo SDK 52 + Expo Router - apps/mobile
 - [x] 1.5 Setup package: `@propery-agents/ui` (componentes)
 - [x] 1.6 Setup package: `@propery-agents/core` (hooks, stores)
 - [x] 1.7 Setup package: `@propery-agents/api-client` (types + mocks)
@@ -38,7 +38,7 @@ Sesión actual: 1 (En progreso)
 - [x] 1.15 Setup GitHub Actions (lint, typecheck, test, build)
 - [x] 1.16 README con instrucciones de desarrollo
 
-**Status:** IN_PROGRESS (14/16 completadas - pendiente: Expo mobile setup)
+**Status:** IN_PROGRESS (15/16 completadas - pendiente: NativeWind)
 
 ---
 
@@ -423,9 +423,9 @@ Sesión actual: 1 (En progreso)
 
 ## Registro de Sesiones
 
-| Sesión | Fecha      | Duración    | Módulos | Tareas Completadas | Notas                                                   |
-| ------ | ---------- | ----------- | ------- | ------------------ | ------------------------------------------------------- |
-| 1      | 2026-01-29 | En progreso | 1, 2    | 24/27              | Setup monorepo, packages, dashboard layout, KPIs charts |
+| Sesión | Fecha      | Duración    | Módulos | Tareas Completadas | Notas                                             |
+| ------ | ---------- | ----------- | ------- | ------------------ | ------------------------------------------------- |
+| 1      | 2026-01-29 | En progreso | 1, 2    | 25/27              | Setup monorepo, packages, dashboard, mobile, KPIs |
 
 ---
 

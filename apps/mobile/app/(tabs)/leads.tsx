@@ -1,0 +1,23 @@
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function LeadsScreen() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Leads</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f7fafc',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#2d3748',
+  },
+});
