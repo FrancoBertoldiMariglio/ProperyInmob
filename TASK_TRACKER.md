@@ -9,8 +9,8 @@ Sesión actual: 1 (En progreso)
 
 ## Estado General
 
-- Módulo actual: 2 de 10 (casi completo)
-- Progreso global: 20%
+- Módulo actual: 4 de 10 (en progreso)
+- Progreso global: 40%
 - Apps: Dashboard (React/Vite) + Mobile (React Native/Expo)
 
 ---
@@ -128,32 +128,32 @@ Sesión actual: 1 (En progreso)
 
 **Estimación:** 8-10 horas | **Dependencias:** Módulos 1, 2, 3
 
-- [ ] 4.1 Tipos TypeScript: Lead, LeadStatus, LeadActivity
-- [ ] 4.2 Mock data: 50+ leads con actividades
-- [ ] 4.3 LeadPipeline component (Kanban):
-  - [ ] Columnas por estado (Nuevo, Contactado, Visitó, Negociando, Cerrado, Perdido)
-  - [ ] Drag & drop entre columnas
-  - [ ] Cards con info resumida
-  - [ ] Contador por columna
-- [ ] 4.4 LeadCard component:
-  - [ ] Nombre + propiedad
-  - [ ] Fuente (ícono)
-  - [ ] Prioridad (badge)
-  - [ ] Tiempo desde último contacto
-  - [ ] Quick actions
-- [ ] 4.5 Vista alternativa: LeadTable (lista)
-- [ ] 4.6 LeadFilters:
-  - [ ] Por estado
-  - [ ] Por propiedad
-  - [ ] Por fuente
-  - [ ] Por fecha
-  - [ ] Por prioridad
-- [ ] 4.7 LeadDetail page:
-  - [ ] Info de contacto
-  - [ ] Propiedad asociada
-  - [ ] Timeline de actividades
-  - [ ] Próxima visita programada
-  - [ ] Notas
+- [x] 4.1 Tipos TypeScript: Lead, LeadStatus, LeadActivity
+- [x] 4.2 Mock data: 50+ leads con actividades
+- [x] 4.3 LeadPipeline component (Kanban):
+  - [x] Columnas por estado (Nuevo, Contactado, Visitó, Negociando, Cerrado, Perdido)
+  - [x] Drag & drop entre columnas
+  - [x] Cards con info resumida
+  - [x] Contador por columna
+- [x] 4.4 LeadCard component:
+  - [x] Nombre + propiedad
+  - [x] Fuente (ícono)
+  - [x] Prioridad (badge)
+  - [x] Tiempo desde último contacto
+  - [x] Quick actions
+- [x] 4.5 Vista alternativa: LeadTable (lista)
+- [x] 4.6 LeadFilters:
+  - [x] Por estado
+  - [x] Por propiedad
+  - [x] Por fuente
+  - [x] Por fecha
+  - [x] Por prioridad
+- [x] 4.7 LeadDetail page:
+  - [x] Info de contacto
+  - [x] Propiedad asociada
+  - [x] Timeline de actividades
+  - [x] Próxima visita programada
+  - [x] Notas
 - [ ] 4.8 LeadForm (crear/editar):
   - [ ] Datos de contacto
   - [ ] Calificación (budget, financing, timeline)
@@ -163,12 +163,12 @@ Sesión actual: 1 (En progreso)
   - [ ] Tipo (llamada, email, visita, nota)
   - [ ] Descripción
   - [ ] Fecha
-- [ ] 4.10 Cambio de estado con confirmación
-- [ ] 4.11 Hook `useLeads`
-- [ ] 4.12 Store `leadPipelineStore`
+- [x] 4.10 Cambio de estado con confirmación
+- [x] 4.11 Hook `useLeads`
+- [x] 4.12 Store `leadPipelineStore`
 - [ ] 4.13 Unit tests
 
-**Status:** NOT_STARTED
+**Status:** IN_PROGRESS (10/13 completadas)
 
 ---
 
