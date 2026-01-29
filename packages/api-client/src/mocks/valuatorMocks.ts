@@ -1,0 +1,207 @@
+import type { Valuation, ValuationInput, Comparable } from '../types';
+
+export const mockComparables: Comparable[] = [
+  {
+    id: 'comp-1',
+    address: 'Honduras 4200, Palermo',
+    type: 'apartment',
+    operation: 'sale',
+    price: 175000,
+    pricePerSqm: 2333,
+    totalArea: 80,
+    coveredArea: 75,
+    bedrooms: 2,
+    bathrooms: 1,
+    soldDate: '2025-01-10',
+    daysOnMarket: 45,
+    distance: 350,
+    similarityScore: 92,
+  },
+  {
+    id: 'comp-2',
+    address: 'Thames 1800, Palermo',
+    type: 'apartment',
+    operation: 'sale',
+    price: 195000,
+    pricePerSqm: 2437,
+    totalArea: 85,
+    coveredArea: 80,
+    bedrooms: 2,
+    bathrooms: 2,
+    soldDate: '2025-01-05',
+    daysOnMarket: 38,
+    distance: 520,
+    similarityScore: 88,
+  },
+  {
+    id: 'comp-3',
+    address: 'Gorriti 4800, Palermo',
+    type: 'apartment',
+    operation: 'sale',
+    price: 168000,
+    pricePerSqm: 2240,
+    totalArea: 78,
+    coveredArea: 75,
+    bedrooms: 2,
+    bathrooms: 1,
+    soldDate: '2024-12-20',
+    daysOnMarket: 52,
+    distance: 280,
+    similarityScore: 90,
+  },
+  {
+    id: 'comp-4',
+    address: 'Armenia 1600, Palermo',
+    type: 'apartment',
+    operation: 'sale',
+    price: 210000,
+    pricePerSqm: 2625,
+    totalArea: 88,
+    coveredArea: 80,
+    bedrooms: 3,
+    bathrooms: 2,
+    soldDate: '2024-12-15',
+    daysOnMarket: 30,
+    distance: 650,
+    similarityScore: 82,
+  },
+  {
+    id: 'comp-5',
+    address: 'Soler 5000, Palermo',
+    type: 'apartment',
+    operation: 'sale',
+    price: 158000,
+    pricePerSqm: 2207,
+    totalArea: 72,
+    coveredArea: 72,
+    bedrooms: 2,
+    bathrooms: 1,
+    soldDate: '2024-12-10',
+    daysOnMarket: 60,
+    distance: 420,
+    similarityScore: 85,
+  },
+  {
+    id: 'comp-6',
+    address: 'Niceto Vega 5200, Palermo',
+    type: 'apartment',
+    operation: 'sale',
+    price: 182000,
+    pricePerSqm: 2426,
+    totalArea: 78,
+    coveredArea: 75,
+    bedrooms: 2,
+    bathrooms: 1,
+    soldDate: '2024-11-28',
+    daysOnMarket: 42,
+    distance: 380,
+    similarityScore: 91,
+  },
+];
+
+export const mockValuations: Valuation[] = [
+  {
+    id: 'val-1',
+    input: {
+      type: 'apartment',
+      operation: 'sale',
+      address: {
+        neighborhood: 'Palermo',
+        city: 'Buenos Aires',
+      },
+      features: {
+        totalArea: 85,
+        coveredArea: 75,
+        bedrooms: 2,
+        bathrooms: 1,
+        age: 15,
+        condition: 'good',
+      },
+    },
+    result: {
+      estimatedPrice: 185000,
+      pricePerSqm: 2470,
+      confidenceScore: 85,
+      priceRange: {
+        min: 170000,
+        max: 200000,
+      },
+      methodology:
+        'Analisis comparativo de mercado basado en 6 propiedades similares vendidas en los ultimos 90 dias.',
+      factors: [
+        { factor: 'Ubicacion', impact: 'positive', description: 'Zona premium de alta demanda' },
+        {
+          factor: 'Antiguedad',
+          impact: 'neutral',
+          description: 'Edificio de 15 anos en buen estado',
+        },
+        { factor: 'Amenities', impact: 'positive', description: 'Gym, laundry y rooftop' },
+        {
+          factor: 'Sin cochera',
+          impact: 'negative',
+          description: 'La falta de cochera reduce el valor',
+        },
+      ],
+    },
+    comparables: mockComparables.slice(0, 6),
+    marketContext: {
+      zone: 'Palermo',
+      avgPricePerSqm: 3500,
+      pricePerSqmRange: { min: 2800, max: 4200 },
+      demandLevel: 'very_high',
+      trendDirection: 'up',
+      trendPercentage: 2.3,
+      estimatedTimeToSell: 42,
+    },
+    recommendation: {
+      suggestedPrice: 189000,
+      strategy: 'neutral',
+      reasoning:
+        'El precio sugerido esta ligeramente por encima del estimado para aprovechar la alta demanda actual.',
+      expectedTimeToSell: 45,
+    },
+    createdAt: '2025-01-25T10:00:00Z',
+  },
+];
+
+export function generateValuation(input: ValuationInput): Valuation {
+  const basePrice = 2400; // Base price per sqm
+  const area = input.features.totalArea || 80;
+  const estimatedPrice = Math.round(basePrice * area);
+
+  return {
+    id: `val-${Date.now()}`,
+    input,
+    result: {
+      estimatedPrice,
+      pricePerSqm: basePrice,
+      confidenceScore: 78,
+      priceRange: {
+        min: Math.round(estimatedPrice * 0.9),
+        max: Math.round(estimatedPrice * 1.1),
+      },
+      methodology: 'Analisis comparativo de mercado basado en propiedades similares.',
+      factors: [
+        { factor: 'Ubicacion', impact: 'positive', description: 'Buena zona' },
+        { factor: 'Superficie', impact: 'neutral', description: 'Tamano promedio para la zona' },
+      ],
+    },
+    comparables: mockComparables.slice(0, 5),
+    marketContext: {
+      zone: input.address.neighborhood || 'Buenos Aires',
+      avgPricePerSqm: 3200,
+      pricePerSqmRange: { min: 2500, max: 4000 },
+      demandLevel: 'high',
+      trendDirection: 'stable',
+      trendPercentage: 0.5,
+      estimatedTimeToSell: 50,
+    },
+    recommendation: {
+      suggestedPrice: Math.round(estimatedPrice * 1.02),
+      strategy: 'neutral',
+      reasoning: 'Precio competitivo para el mercado actual.',
+      expectedTimeToSell: 50,
+    },
+    createdAt: new Date().toISOString(),
+  };
+}

@@ -1,13 +1,16 @@
 Prueba la IA directamente en tus aplicaciones favoritas … Usa Gemini para generar borradores y pulir contenido, y disfruta de Gemini Pro con acceso a la IA de nueva generación de Google por 19,99 US$ 9,99 US$ durante 2 meses
+
 # Propery Agents - Task Tracker
+
 **Aplicación para Agentes Inmobiliarios (Dashboard Web + Mobile)**
 
 Última actualización: 2026-01-29
-Sesión actual: 0 (Pre-desarrollo)
+Sesión actual: 1 (En progreso)
 
 ## Estado General
-- Módulo actual: 0 de 10
-- Progreso global: 0%
+
+- Módulo actual: 1 de 10 (casi completo)
+- Progreso global: 8%
 - Apps: Dashboard (React/Vite) + Mobile (React Native/Expo)
 
 ---
@@ -15,30 +18,32 @@ Sesión actual: 0 (Pre-desarrollo)
 ## Módulos
 
 ### 1. Setup Proyecto + Design System
+
 **Estimación:** 4-6 horas | **Dependencias:** Ninguna
 
-- [ ] 1.1 Inicializar monorepo con Turborepo + pnpm
-- [ ] 1.2 Configurar React + Vite 6 - apps/dashboard
-- [ ] 1.3 Configurar React Router DOM v7
+- [x] 1.1 Inicializar monorepo con Turborepo + pnpm
+- [x] 1.2 Configurar React + Vite 6 - apps/dashboard
+- [x] 1.3 Configurar React Router DOM v7
 - [ ] 1.4 Configurar Expo SDK 52 + Expo Router - apps/mobile
-- [ ] 1.5 Setup package: `@propery-agents/ui` (componentes)
-- [ ] 1.6 Setup package: `@propery-agents/core` (hooks, stores)
-- [ ] 1.7 Setup package: `@propery-agents/api-client` (types + mocks)
-- [ ] 1.8 Setup package: `@propery-agents/ai` (integración AI)
-- [ ] 1.9 Setup package: `@propery-agents/config`
-- [ ] 1.10 Configurar Tailwind v4 + shadcn/ui (dashboard)
+- [x] 1.5 Setup package: `@propery-agents/ui` (componentes)
+- [x] 1.6 Setup package: `@propery-agents/core` (hooks, stores)
+- [x] 1.7 Setup package: `@propery-agents/api-client` (types + mocks)
+- [x] 1.8 Setup package: `@propery-agents/ai` (integración AI)
+- [x] 1.9 Setup package: `@propery-agents/config`
+- [x] 1.10 Configurar Tailwind v4 + shadcn/ui (dashboard)
 - [ ] 1.11 Configurar NativeWind (mobile)
-- [ ] 1.12 Crear Design Tokens (colores corporativos, spacing)
-- [ ] 1.13 Crear componentes primitivos: Button, Input, Select, Card, DataTable
-- [ ] 1.14 Configurar ESLint + Prettier + husky
-- [ ] 1.15 Setup GitHub Actions (lint, typecheck, test, build)
-- [ ] 1.16 README con instrucciones de desarrollo
+- [x] 1.12 Crear Design Tokens (colores corporativos, spacing)
+- [x] 1.13 Crear componentes primitivos: Button, Input, Select, Card, DataTable
+- [x] 1.14 Configurar ESLint + Prettier + husky
+- [x] 1.15 Setup GitHub Actions (lint, typecheck, test, build)
+- [x] 1.16 README con instrucciones de desarrollo
 
-**Status:** NOT_STARTED
+**Status:** IN_PROGRESS (14/16 completadas - pendiente: Expo mobile setup)
 
 ---
 
 ### 2. Dashboard Layout + KPIs
+
 **Estimación:** 6-8 horas | **Dependencias:** Módulo 1
 
 - [ ] 2.1 Layout principal del dashboard:
@@ -76,6 +81,7 @@ Sesión actual: 0 (Pre-desarrollo)
 ---
 
 ### 3. Gestión de Propiedades
+
 **Estimación:** 8-10 horas | **Dependencias:** Módulos 1, 2
 
 - [ ] 3.1 Tipos TypeScript: AgentProperty, PropertyStatus, Portal
@@ -119,6 +125,7 @@ Sesión actual: 0 (Pre-desarrollo)
 ---
 
 ### 4. CRM de Leads
+
 **Estimación:** 8-10 horas | **Dependencias:** Módulos 1, 2, 3
 
 - [ ] 4.1 Tipos TypeScript: Lead, LeadStatus, LeadActivity
@@ -166,6 +173,7 @@ Sesión actual: 0 (Pre-desarrollo)
 ---
 
 ### 5. Calendario de Visitas
+
 **Estimación:** 6-8 horas | **Dependencias:** Módulos 1, 3, 4
 
 - [ ] 5.1 Tipos TypeScript: Visit, VisitStatus
@@ -200,6 +208,7 @@ Sesión actual: 0 (Pre-desarrollo)
 ---
 
 ### 6. Analytics de Mercado
+
 **Estimación:** 8-10 horas | **Dependencias:** Módulo 1
 
 - [ ] 6.1 Mock data: histórico de mercado por zona (12 meses)
@@ -240,6 +249,7 @@ Sesión actual: 0 (Pre-desarrollo)
 ---
 
 ### 7. Valuador ML
+
 **Estimación:** 8-10 horas | **Dependencias:** Módulos 1, 6
 
 - [ ] 7.1 Tipos TypeScript: Valuation, Comparable
@@ -295,6 +305,7 @@ Sesión actual: 0 (Pre-desarrollo)
 ---
 
 ### 8. AI Assistant para Agentes
+
 **Estimación:** 8-10 horas | **Dependencias:** Módulos 1, 3, 7
 
 - [ ] 8.1 Arquitectura de providers AI agnóstica
@@ -329,6 +340,7 @@ Sesión actual: 0 (Pre-desarrollo)
 ---
 
 ### 9. Reportes y Exportación
+
 **Estimación:** 4-6 horas | **Dependencias:** Módulos 6, 7, 8
 
 - [ ] 9.1 ReportsPage:
@@ -359,6 +371,7 @@ Sesión actual: 0 (Pre-desarrollo)
 ---
 
 ### 10. App Mobile para Agentes
+
 **Estimación:** 10-12 horas | **Dependencias:** Módulos 1-9
 
 - [ ] 10.1 Tab Navigation:
@@ -410,44 +423,60 @@ Sesión actual: 0 (Pre-desarrollo)
 
 ## Registro de Sesiones
 
-| Sesión | Fecha | Duración | Módulos | Tareas Completadas | Notas |
-|--------|-------|----------|---------|-------------------|-------|
-| 1 | - | - | - | - | Pendiente inicio |
+| Sesión | Fecha      | Duración    | Módulos | Tareas Completadas | Notas                               |
+| ------ | ---------- | ----------- | ------- | ------------------ | ----------------------------------- |
+| 1      | 2026-01-29 | En progreso | 1       | 14/16              | Setup monorepo, dashboard, packages |
 
 ---
 
 ## Notas Técnicas
 
 ### Decisiones de Arquitectura
-- (Por completar durante desarrollo)
+
+- Monorepo con Turborepo + pnpm workspaces
+- React 19 + Vite 6 para el dashboard web
+- Tailwind CSS v4 con plugin de Vite
+- TanStack Query v5 para data fetching
+- Zustand para estado global
+- Mock API con tipos TypeScript completos
+- AI package con arquitectura de providers agnóstica
 
 ### Problemas Encontrados
-- (Por completar durante desarrollo)
+
+- Ninguno hasta el momento
 
 ### Dependencias Instaladas
-- (Por completar durante desarrollo)
+
+- turbo, prettier, husky, lint-staged (root)
+- react, react-dom, react-router-dom, @tanstack/react-query, zustand
+- vite, tailwindcss, @tailwindcss/vite
+- vitest, @testing-library/react
+- lucide-react, apexcharts
+- class-variance-authority, @radix-ui/react-slot
 
 ---
 
 ## Estimación Total
 
-| Módulo | Estimación |
-|--------|------------|
-| 1. Setup | 4-6h |
-| 2. Dashboard + KPIs | 6-8h |
-| 3. Gestión Propiedades | 8-10h |
-| 4. CRM Leads | 8-10h |
-| 5. Calendario | 6-8h |
-| 6. Analytics Mercado | 8-10h |
-| 7. Valuador ML | 8-10h |
-| 8. AI Assistant | 8-10h |
-| 9. Reportes | 4-6h |
-| 10. Mobile App | 10-12h |
-| **TOTAL** | **70-90h** |
+| Módulo                 | Estimación |
+| ---------------------- | ---------- |
+| 1. Setup               | 4-6h       |
+| 2. Dashboard + KPIs    | 6-8h       |
+| 3. Gestión Propiedades | 8-10h      |
+| 4. CRM Leads           | 8-10h      |
+| 5. Calendario          | 6-8h       |
+| 6. Analytics Mercado   | 8-10h      |
+| 7. Valuador ML         | 8-10h      |
+| 8. AI Assistant        | 8-10h      |
+| 9. Reportes            | 4-6h       |
+| 10. Mobile App         | 10-12h     |
+| **TOTAL**              | **70-90h** |
 
 ---
 
 ## Próximos Pasos
-1. Iniciar Sesión 1
-2. Completar Módulo 1 (Setup)
-3. Continuar con Módulo 2 (Dashboard + KPIs)
+
+1. Completar configuración de Expo + NativeWind para mobile (opcional)
+2. Iniciar Módulo 2 (Dashboard Layout + KPIs)
+3. Implementar sidebar colapsable y header con navegación
+4. Crear componentes KPICard con sparklines
